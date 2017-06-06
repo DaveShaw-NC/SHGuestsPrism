@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="ModuleA.Views.GuestDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModuleA.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="440" d:DesignWidth="900">
+        <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <RadialGradientBrush Center="466.8,235.2" GradientOrigin="466.8,235.2" MappingMode="Absolute" RadiusY="235.2" RadiusX="466.8">
+                <GradientStop Color="#FF80B3D4" />
+                <GradientStop Color="#FF456AB4"
+                              Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="33*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+            <TextBlock TextDecorations="Underline" Text="{Binding label_content}" FontWeight="Bold"  FontFamily="MS Reference Sans Serif"
+                       Foreground="NavajoWhite"  FontSize="16" FontStyle="Italic"/>
+        </Label>
+        <!--#region StackPanel for column 1 (0)-->
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="0, 20, 0, 0">
+            <Label HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="228" Height="24">
+                <TextBlock TextDecorations="Underline" Text="Guest Personal Information" FontWeight="Bold"  FontFamily="MS Reference Sans Serif"/>
+            </Label>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Birth Date" Margin="10, 0, 0, 0" />
+                <DatePicker SelectedDate="{Binding SelectedPerson.BirthDate}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="192"
+                            IsEnabled="False" FontWeight="Bold"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Name" Margin="10, 0, 0, 0" />
+                <TextBox Text="{Binding SelectedPerson.Guest_Name}" HorizontalAlignment="Left" Height="29" Margin="10"
+                         VerticalAlignment="Top" Width="192" FontSize="14" VerticalContentAlignment="Bottom"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal"  Margin="0">
+                <Label Content="SSN/W7" Margin="10, 0, 0, 0" VerticalContentAlignment="Center"/>
+                <TextBox HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Height="23" Width="120"
+                         Text="{Binding SelectedPerson.SSN}" IsReadOnly="True" FontWeight="Bold"
+                         VerticalContentAlignment="Bottom"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" Margin="0">
+                <Label Content="Gender" Margin="10, 0, 0, 0" VerticalContentAlignment="Center"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10" Width="40" VerticalContentAlignment="Bottom"
+                         Text="{Binding SelectedPerson.Gender}" HorizontalContentAlignment="Center"
+                         VerticalAlignment="Top"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal"  Margin="0">
+                <Label Content="Guest ID" Margin="10, 0, 0, 0" VerticalContentAlignment="Center"  FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+                <TextBox Text="{Binding SelectedPerson.Guest_ID, StringFormat=\{0:D\}}" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                         Height="23" Margin="10" FontSize="12" VerticalAlignment="Top" Width="40" IsReadOnly="True"/>
+                <Label Content="Visit ID" Margin="5, 0, 0, 0" VerticalContentAlignment="Center"  FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+                <TextBox HorizontalContentAlignment="Right"  Height="23" Margin="10" VerticalContentAlignment="Bottom" FontSize="12"
+                         Text="{Binding SelectedPerson.Visit_ID, StringFormat=\{0:D\}}"
+                         VerticalAlignment="Top" Width="40" IsReadOnly="True"/>
+            </WrapPanel>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region StackPanel for column 2 (1)-->
+        <StackPanel Grid.Column="1" Grid.Row="0"  Margin="0, 20, 0, 0">
+            <Label HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="228">
+                <TextBlock TextDecorations="Underline" Text="Guest Admission Information" FontWeight="Bold"  FontFamily="MS Reference Sans Serif"/>
+            </Label>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Admit Date" Margin="10, 0, 0, 0" />
+                <DatePicker x:Name="admitdate_DatePicker" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="228" 
+                            SelectedDate="{Binding SelectedPerson.Admit, StringFormat=\{0:MM/dd/yyyy\}}" IsEnabled="False" FontWeight="Bold"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Reason"  Margin="10, 0, 0, 0" />
+                <TextBox HorizontalAlignment="Left" Height="44" Margin="10, 10, 15, 15" TextWrapping="Wrap" VerticalAlignment="Top" Width="228"
+                         Text="{Binding SelectedPerson.In_Reason}"
+                         VerticalScrollBarVisibility="Visible"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Agency (Worker)"  Margin="10, 0, 0, 0" />
+                <TextBox HorizontalAlignment="Left" Height="44" Margin="10" TextWrapping="Wrap"
+                         Text="{Binding SelectedPerson.AgencyWorker}" VerticalAlignment="Top" Width="228"
+                         VerticalScrollBarVisibility="Visible"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" Margin="0, 15">
+                <Label Content="Room Number" Margin="5, 10" />
+                <TextBox Height="23" VerticalAlignment="Top" Width="25" Margin="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"
+                         Text="{Binding SelectedPerson.Room, StringFormat=\{0:N0\}}"/>
+                <Label Content="Bed Number" Margin="5, 10" />
+                <TextBox Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" Margin="10" HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Bottom" Text="{Binding SelectedPerson.Bed, StringFormat=\{0:N0\}}"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" Margin="0, 5">
+                <Label Content="Visit #" Margin="5, 10" />
+                <TextBox Height="23" Text="{Binding SelectedPerson.Visit_Number}" VerticalAlignment="Top" Width="25" Margin="10"
+                         VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
+            </WrapPanel>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region StackPanel for column 3 (2)-->
+        <StackPanel Grid.Column="2" Grid.Row="0" Margin="0, 20, 0, 0">
+            <Label HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="228" Height="24">
+                <TextBlock TextDecorations="Underline" Text="Guest Discharge Information" FontWeight="Bold"  FontFamily="MS Reference Sans Serif"/>
+            </Label>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Discharge Date" Margin="10, 0, 0, 0" />
+                <DatePicker HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Width="228"
+                            SelectedDate="{Binding SelectedPerson.Discharge, StringFormat=\{0:MM/dd/yyyy\}}" IsEnabled="False" FontWeight="Bold"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="0">
+                <Label Content="Reason"  Margin="10, 0, 0, 0" />
+                <TextBox HorizontalAlignment="Left" Height="44" Margin="10"  TextWrapping="Wrap" VerticalAlignment="Top" Width="228" 
+                         Text="{Binding SelectedPerson.Out_Reason}"
+                         VerticalScrollBarVisibility="Visible"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" Margin="0">
+                <CheckBox VerticalAlignment="Top" Margin="10" Height="26" IsChecked="{Binding SelectedPerson.Deceased}" Content="Deceased"/>
+                <CheckBox VerticalAlignment="Center" Margin="10" Height="25" IsChecked="{Binding SelectedPerson.Return}" Content="Return"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" Margin="0">
+                <Label Content="Stay Days" Margin="5, 10" />
+                <TextBox HorizontalContentAlignment="Center"  Height="23" Margin="10" VerticalAlignment="Top" Width="39"
+                         Text="{Binding SelectedPerson.Bed_Days, StringFormat=\{0:N0\}}"
+                         VerticalContentAlignment="Bottom"/>
+            </WrapPanel>
+        </StackPanel>
+        <!--#endregion-->
+
+    </Grid>
+</UserControl>

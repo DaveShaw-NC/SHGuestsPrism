@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SamHouseGuestsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Guests">
+    <Key>
+      <PropertyRef Name="GuestID" />
+    </Key>
+    <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Roster" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SSN" Type="bigint" Nullable="false" />
+    <Property Name="Gender" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="Visits" Type="int" Nullable="false" />
+    <Property Name="g_Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="LastVisitDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Visits">
+    <Key>
+      <PropertyRef Name="VisitID" />
+    </Key>
+    <Property Name="VisitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitNumber" Type="int" Nullable="false" />
+    <Property Name="AdmitDate" Type="datetime" Nullable="false" />
+    <Property Name="Discharged" Type="datetime" Nullable="false" />
+    <Property Name="VisitDays" Type="int" Nullable="false" />
+    <Property Name="Roster" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="AdmitReason" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DischargeReason" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Agency" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Worker" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Room" Type="int" />
+    <Property Name="Bed" Type="int" />
+    <Property Name="CanReturn" Type="bit" Nullable="false" />
+    <Property Name="Deceased" Type="bit" Nullable="false" />
+    <Property Name="EditDate" Type="datetime" Nullable="false" />
+    <Property Name="VisitKey" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="v_Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="GuestID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Visits_dbo_Guests_GuestID">
+    <End Role="Guests" Type="Self.Guests" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guests">
+        <PropertyRef Name="GuestID" />
+      </Principal>
+      <Dependent Role="Visits">
+        <PropertyRef Name="GuestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SamHouseGuestsModelStoreContainer">
+    <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visits" EntityType="Self.Visits" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Visits_dbo_Guests_GuestID" Association="Self.FK_dbo_Visits_dbo_Guests_GuestID">
+      <End Role="Guests" EntitySet="Guests" />
+      <End Role="Visits" EntitySet="Visits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

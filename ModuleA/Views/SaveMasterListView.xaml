@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="ModuleA.Views.SaveMasterListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModuleA.Views"
+             xmlns:vms="clr-namespace:ModuleA.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ListView x:Name="_listOfPeople" ItemsSource="{Binding People}"
+                  VerticalAlignment="Top" HorizontalAlignment="Left"
+                  Background="MediumSlateBlue"  Height="400" Grid.Column="0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <prism:InvokeCommandAction Command="{Binding PersonSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfPeople}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name, StringFormat=\{0:D\}}" FontWeight="Bold" Foreground="Crimson"
+                                                                   FontSize="16" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                                    <TextBlock Text="{Binding Path=ItemCount}" FontSize="16"  Foreground="Green" FontWeight="Bold"
+                                                                   FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                                    <TextBlock Text=" Guest(s)" FontSize="16"  Foreground="Navy"  FontStyle="Italic"
+                                                                   HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Roster" DisplayMemberBinding="{Binding Roster, Mode=OneWay}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Guest_Name, Mode=OneWay}"/>
+                        <GridViewColumn Header="Guest Id" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Guest_ID, Mode=OneWay, StringFormat=\{0:N0\}}"
+                                           Style="{StaticResource tbstyle}" TextAlignment="Right"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Visit Id" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Visit_ID, Mode=OneWay, StringFormat=\{0:N0\}}"
+                                           Style="{StaticResource tbstyle}" TextAlignment="Right"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Visit #" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Visit_Number, Mode=OneWay, StringFormat=\{0:N0\}}"
+                                           Style="{StaticResource parkroadstyle}" TextAlignment="Right"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

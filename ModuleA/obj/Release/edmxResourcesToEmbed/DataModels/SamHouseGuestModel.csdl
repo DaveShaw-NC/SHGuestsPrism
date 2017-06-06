@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SamHouseGuestsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="GuestID" />
+    </Key>
+    <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Roster" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SSN" Type="Int64" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Visits" Type="Int32" Nullable="false" />
+    <Property Name="g_Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="LastVisitDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Visits1" Relationship="Self.FK_dbo_Visits_dbo_Guests_GuestID" FromRole="Guests" ToRole="Visits" />
+  </EntityType>
+  <EntityType Name="Visit">
+    <Key>
+      <PropertyRef Name="VisitID" />
+    </Key>
+    <Property Name="VisitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VisitNumber" Type="Int32" Nullable="false" />
+    <Property Name="AdmitDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Discharged" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VisitDays" Type="Int32" Nullable="false" />
+    <Property Name="Roster" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="AdmitReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DischargeReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Agency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Worker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Room" Type="Int32" />
+    <Property Name="Bed" Type="Int32" />
+    <Property Name="CanReturn" Type="Boolean" Nullable="false" />
+    <Property Name="Deceased" Type="Boolean" Nullable="false" />
+    <Property Name="EditDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VisitKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="v_Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="GuestID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_dbo_Visits_dbo_Guests_GuestID" FromRole="Visits" ToRole="Guests" />
+  </EntityType>
+  <Association Name="FK_dbo_Visits_dbo_Guests_GuestID">
+    <End Role="Guests" Type="Self.Guest" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Visits" Type="Self.Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guests">
+        <PropertyRef Name="GuestID" />
+      </Principal>
+      <Dependent Role="Visits">
+        <PropertyRef Name="GuestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SamHouseGuestsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Guests" EntityType="Self.Guest" />
+    <EntitySet Name="Visits" EntityType="Self.Visit" />
+    <AssociationSet Name="FK_dbo_Visits_dbo_Guests_GuestID" Association="Self.FK_dbo_Visits_dbo_Guests_GuestID">
+      <End Role="Guests" EntitySet="Guests" />
+      <End Role="Visits" EntitySet="Visits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

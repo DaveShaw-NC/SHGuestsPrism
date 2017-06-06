@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SamHouseGuestsModelStoreContainer" CdmEntityContainer="SamHouseGuestsEntities">
+    <EntitySetMapping Name="Guests">
+      <EntityTypeMapping TypeName="SamHouseGuestsModel.Guest">
+        <MappingFragment StoreEntitySet="Guests">
+          <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+          <ScalarProperty Name="Roster" ColumnName="Roster" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Visits" ColumnName="Visits" />
+          <ScalarProperty Name="g_Timestamp" ColumnName="g_Timestamp" />
+          <ScalarProperty Name="LastVisitDate" ColumnName="LastVisitDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visits">
+      <EntityTypeMapping TypeName="SamHouseGuestsModel.Visit">
+        <MappingFragment StoreEntitySet="Visits">
+          <ScalarProperty Name="VisitID" ColumnName="VisitID" />
+          <ScalarProperty Name="VisitNumber" ColumnName="VisitNumber" />
+          <ScalarProperty Name="AdmitDate" ColumnName="AdmitDate" />
+          <ScalarProperty Name="Discharged" ColumnName="Discharged" />
+          <ScalarProperty Name="VisitDays" ColumnName="VisitDays" />
+          <ScalarProperty Name="Roster" ColumnName="Roster" />
+          <ScalarProperty Name="AdmitReason" ColumnName="AdmitReason" />
+          <ScalarProperty Name="DischargeReason" ColumnName="DischargeReason" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="Worker" ColumnName="Worker" />
+          <ScalarProperty Name="Room" ColumnName="Room" />
+          <ScalarProperty Name="Bed" ColumnName="Bed" />
+          <ScalarProperty Name="CanReturn" ColumnName="CanReturn" />
+          <ScalarProperty Name="Deceased" ColumnName="Deceased" />
+          <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+          <ScalarProperty Name="VisitKey" ColumnName="VisitKey" />
+          <ScalarProperty Name="v_Timestamp" ColumnName="v_Timestamp" />
+          <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
